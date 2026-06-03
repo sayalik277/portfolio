@@ -1,9 +1,9 @@
-# 🌐 Dev Portfolio
+# Sayali Kamble — Portfolio
 
-> A full-stack personal portfolio that changes its colour palette with the season, tracks visitors, and shows a live daily scrum board.
+> Full-stack personal portfolio · React + TypeScript · Python FastAPI · Seasonal colour themes · Visitor tracking · Live scrum board
 
-**Live demo:** _(add your deployment URL here)_  
-**GitHub:** [sayalik277](https://github.com/sayalik277)
+**Live:** _(add your URL here after deploying)_  
+**GitHub:** [sayalik277](https://github.com/sayalik277) &nbsp;|&nbsp; **LinkedIn:** [sayalikamble](https://linkedin.com/in/sayalikamble)
 
 ---
 
@@ -11,245 +11,224 @@
 
 | Feature | Description |
 |---|---|
-| 🎨 **Seasonal Theming** | Colour palette auto-switches by month — Spring / Summer / Fall / Winter |
-| 👋 **Visitor Guestbook** | Modal asks first-time visitors for their name; stored in the backend |
-| 📊 **Live Visitor Counter** | Real-time visit count in the navbar and footer |
-| 📋 **Daily Scrum Board** | Live Kanban (To Do / In Progress / Done) showing what you're working on |
-| 🔐 **Admin Panel** | `/admin` — view all visitors, add/edit/delete scrum items (token-protected) |
-| 🚀 **Projects Showcase** | Cards for every GitHub project with tech chips and live links |
-| 📅 **Experience Timeline** | Animated work history with role details and tech used |
-| 📖 **About + Bookshelf** | Personality section with a reading list and trait cards |
-| ⌨️ **Typing Animation** | Hero section cycles through your roles with a terminal cursor |
+| 🎨 **Seasonal Theming** | Palette auto-switches by month — Spring / Summer / Fall / Winter |
+| 👋 **Visitor Guestbook** | Modal asks first-time visitors for their name |
+| 📊 **Live Visitor Counter** | Real-time visit count in navbar and footer |
+| 📋 **Daily Scrum Board** | Live Kanban (To Do / In Progress / Done) |
+| 🔐 **Admin Panel** | `/admin` — view visitors, manage scrum items |
+| 🚀 **Projects Showcase** | Cards for every GitHub project with tech chips |
+| 📅 **Experience Timeline** | Animated work history |
+| 📖 **Bookshelf** | Reading list with status badges |
 
 ---
 
 ## 🛠 Tech Stack
 
-```
-Frontend          Backend            Database   DevOps
-──────────────    ──────────────     ────────   ──────────
-React 18          Python 3.12        SQLite     Docker (optional)
-TypeScript        FastAPI            SQLAlchemy
-Vite              Pydantic v2
-Tailwind CSS      Uvicorn
-React Query
-React Router 6
-React Icons
-```
+| Layer | Tech |
+|---|---|
+| Frontend | React 18 · TypeScript · Vite · Tailwind CSS |
+| Backend | Python 3.12 · FastAPI · SQLAlchemy · SQLite |
+| Production | Docker · nginx · Render · Vercel |
 
 ---
 
-## 🗂 Project Structure
+## 🚀 Deploy (Free — shareable HTTPS link in ~10 min)
 
-```
-portfolio/
-├── backend/                   # Python FastAPI server
-│   ├── app/
-│   │   ├── main.py            # FastAPI app + startup hooks
-│   │   ├── config.py          # Settings (reads from .env)
-│   │   ├── database.py        # SQLAlchemy engine + session
-│   │   ├── models.py          # Visitor, ScrumItem ORM models
-│   │   ├── schemas.py         # Pydantic request/response schemas
-│   │   ├── seed.py            # Seeds scrum board on first start
-│   │   └── routes/
-│   │       ├── visitors.py    # POST /api/visitors, GET /api/visitors/count
-│   │       └── scrum.py       # CRUD /api/scrum, POST /api/scrum/verify-token
-│   ├── requirements.txt
-│   ├── .env.example
-│   └── .env                   # ← create from .env.example (gitignored)
-│
-└── frontend/                  # React + Vite app
-    ├── src/
-    │   ├── components/
-    │   │   ├── Hero.tsx        # Typing animation, stats bar
-    │   │   ├── About.tsx       # Bio, bookshelf, trait cards
-    │   │   ├── Skills.tsx      # Skill groups with progress bars
-    │   │   ├── Projects.tsx    # Project cards grid
-    │   │   ├── Experience.tsx  # Animated timeline
-    │   │   ├── ScrumBoard.tsx  # Live Kanban board
-    │   │   ├── Navbar.tsx      # Sticky nav + visitor badge
-    │   │   ├── Footer.tsx      # Social links + visitor count
-    │   │   └── VisitorModal.tsx
-    │   ├── pages/
-    │   │   └── AdminPanel.tsx  # Visitor list + scrum CRUD
-    │   ├── data/
-    │   │   ├── projects.ts     # ← edit YOUR projects here
-    │   │   └── experience.ts   # ← edit YOUR work history here
-    │   ├── utils/season.ts     # Season detection + CSS variable injection
-    │   ├── hooks/
-    │   │   ├── useSeason.ts    # Applies seasonal theme on mount
-    │   │   └── useVisitor.ts   # Visitor modal logic + localStorage
-    │   └── api/client.ts       # Axios API client
-    ├── vite.config.ts          # Proxies /api → localhost:8000
-    └── tailwind.config.js
-```
+There are two deployment options. **Option A (Render)** is the simplest — one platform, one repo.
 
 ---
 
-## 🚀 Running Locally
+### Option A — Render (recommended, 100% free)
 
-### Prerequisites
+Render hosts both the backend API and the frontend static site for free.
 
-- **Python 3.11+** (`py --version`)
-- **Node.js 18+** (`node --version`)
-- **Git**
+#### Step 1 — Deploy the backend
+
+1. Go to [render.com](https://render.com) → **New → Web Service**
+2. Connect your GitHub and select **sayalik277/portfolio**
+3. Fill in:
+
+   | Field | Value |
+   |---|---|
+   | **Root Directory** | `backend` |
+   | **Runtime** | `Python 3` |
+   | **Build Command** | `pip install -r requirements.txt` |
+   | **Start Command** | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+   | **Plan** | Free |
+
+4. Add environment variables:
+
+   | Key | Value |
+   |---|---|
+   | `ADMIN_TOKEN` | _(pick a secret password)_ |
+   | `CORS_ORIGINS` | `["*"]` |
+
+5. Click **Deploy** — wait ~2 min. Copy the URL, e.g. `https://portfolio-api.onrender.com`
+
+#### Step 2 — Deploy the frontend
+
+1. Go to [render.com](https://render.com) → **New → Static Site**
+2. Same repo — **sayalik277/portfolio**
+3. Fill in:
+
+   | Field | Value |
+   |---|---|
+   | **Root Directory** | `frontend` |
+   | **Build Command** | `npm install && npm run build` |
+   | **Publish Directory** | `dist` |
+
+4. Add environment variable:
+
+   | Key | Value |
+   |---|---|
+   | `VITE_API_URL` | `https://portfolio-api.onrender.com` _(URL from Step 1)_ |
+
+5. Under **Redirects/Rewrites** → add rule: Source `/*` → Destination `/index.html` → Type **Rewrite**
+6. Click **Deploy** — you'll get a URL like `https://portfolio-web.onrender.com` ✅
+
+> **Free tier note:** Render's free backend spins down after 15 min of inactivity and takes ~30 s to wake up on the first request. For a portfolio this is perfectly fine.
 
 ---
 
-### 1 — Backend
+### Option B — Vercel (frontend) + Render (backend)
+
+Vercel gives faster frontend CDN and a nicer `.vercel.app` URL.
+
+#### Backend — same as Option A Step 1
+
+#### Frontend on Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**
+2. Import **sayalik277/portfolio**
+3. Set **Root Directory** to `frontend`
+4. Add environment variable:
+
+   | Key | Value |
+   |---|---|
+   | `VITE_API_URL` | `https://portfolio-api.onrender.com` |
+
+5. Click **Deploy** → get a URL like `https://sayali-portfolio.vercel.app` ✅
+
+---
+
+### Option C — Docker (self-hosted or VPS)
+
+Runs the full stack locally or on any Linux server.
 
 ```bash
-# Clone the repo
+# Clone
 git clone https://github.com/sayalik277/portfolio.git
-cd portfolio/backend
+cd portfolio
 
-# Create & activate virtual environment
+# Set your admin token
+echo "ADMIN_TOKEN=your_secret_here" > .env
+
+# Build and run both services
+docker compose up --build
+
+# Open http://localhost:3000
+```
+
+The database persists in a Docker volume across restarts.
+
+To run on a VPS, point a domain at the server and add an SSL reverse proxy (e.g. Caddy).
+
+---
+
+## 💻 Running Locally (without Docker)
+
+### Prerequisites
+- Python 3.11+ (`py --version`)
+- Node.js 18+ (`node --version`)
+
+### Backend
+```bash
+cd backend
 py -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-# macOS / Linux
-source .venv/bin/activate
-
-# Install dependencies
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS/Linux
 pip install -r requirements.txt
-
-# Create your .env (copy the example and set your admin token)
-copy .env.example .env       # Windows
-# cp .env.example .env       # macOS/Linux
-
-# Edit .env — change ADMIN_TOKEN to something secret:
-# ADMIN_TOKEN=your_secret_token_here
-
-# Start the API server (auto-reloads on file changes)
+copy .env.example .env           # then set ADMIN_TOKEN
 uvicorn app.main:app --reload --port 8000
 ```
 
-> API is now running at **http://localhost:8000**  
-> Interactive docs: **http://localhost:8000/docs**
-
-On first start the database (`portfolio.db`) is created automatically and the scrum board is seeded with 11 sample items.
-
----
-
-### 2 — Frontend
-
-Open a **second terminal**:
-
+### Frontend (second terminal)
 ```bash
-cd portfolio/frontend
-
-# Install packages
+cd frontend
 npm install
-
-# Start the dev server
 npm run dev
+# → http://localhost:5173
 ```
 
-> App is now running at **http://localhost:5173**  
-> Vite automatically proxies all `/api/*` requests to `http://localhost:8000`
+---
+
+## 🔐 Admin Panel
+
+Visit `/admin` on your deployed URL.  
+Enter the `ADMIN_TOKEN` you set during deployment.
+
+- **Render:** check the environment variable you set in Step 1
+- **Local:** value in `backend/.env`
 
 ---
 
-### 3 — Admin Panel
+## ✏️ Personalising Content
 
-Visit **http://localhost:5173/admin**  
-Enter the `ADMIN_TOKEN` value you set in `backend/.env` (default: `changeme123`).
-
-From the admin panel you can:
-- View every visitor (name + IP + timestamp)
-- Add, edit, and delete scrum board items
-
----
-
-## 🎨 Seasonal Colour Themes
-
-The colour palette is chosen automatically from the current calendar month:
-
-| Season | Months | Palette |
-|---|---|---|
-| 🌸 Spring | Mar – May | Light mint background, fresh green + cherry-blossom pink |
-| ☀️ Summer | Jun – Aug | Deep navy background, sunset orange + golden yellow |
-| 🍂 Fall | Sep – Nov | Warm dark-brown background, burnt orange + crimson |
-| ❄️ Winter | Dec – Feb | Near-black background, ice blue + indigo/aurora |
-
-To change the palette or add a new season, edit [`frontend/src/utils/season.ts`](frontend/src/utils/season.ts).
-
----
-
-## ✏️ Personalising Your Portfolio
-
-| File | What to change |
+| File | What to edit |
 |---|---|
-| [`frontend/src/data/projects.ts`](frontend/src/data/projects.ts) | Add / edit your projects (title, description, tech, GitHub URL) |
-| [`frontend/src/data/experience.ts`](frontend/src/data/experience.ts) | Work history, roles, and companies |
-| [`frontend/src/components/About.tsx`](frontend/src/components/About.tsx) | Bio text, bookshelf, and personality trait cards |
-| [`frontend/src/components/Footer.tsx`](frontend/src/components/Footer.tsx) | Social media links (GitHub, LinkedIn, Twitter, Email) |
-| [`frontend/src/components/Hero.tsx`](frontend/src/components/Hero.tsx) | `ROLES` array — the phrases in the typing animation |
-| [`frontend/index.html`](frontend/index.html) | `<title>` tag and meta description |
-| [`backend/app/seed.py`](backend/app/seed.py) | Default scrum board items (runs once on first start) |
-| [`backend/.env`](backend/.env) | `ADMIN_TOKEN` — **change before deploying** |
+| [`frontend/src/data/projects.ts`](frontend/src/data/projects.ts) | Add / edit projects |
+| [`frontend/src/data/experience.ts`](frontend/src/data/experience.ts) | Work history |
+| [`frontend/src/data/books.ts`](frontend/src/data/books.ts) | Reading list + status |
+| [`frontend/src/data/skills.ts`](frontend/src/data/skills.ts) | Skills + levels (0–100) |
+| [`frontend/src/components/About.tsx`](frontend/src/components/About.tsx) | Bio text, trait cards |
+| [`frontend/src/components/Footer.tsx`](frontend/src/components/Footer.tsx) | Social links & email |
+| [`frontend/src/components/Hero.tsx`](frontend/src/components/Hero.tsx) | `ROLES` typing array |
+| [`backend/app/seed.py`](backend/app/seed.py) | Default scrum board items |
+
+After editing any file:
+```bash
+git add . && git commit -m "chore: update content" && git push
+```
+Render and Vercel auto-deploy on every push. ✅
 
 ---
 
-## 🔌 API Reference
+## 🌍 API Reference
 
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
-| `POST` | `/api/visitors` | — | Register a visitor (name optional) |
-| `GET` | `/api/visitors/count` | — | Get total visit count |
+| `POST` | `/api/visitors` | — | Register a visitor |
+| `GET` | `/api/visitors/count` | — | Total visit count |
 | `GET` | `/api/visitors?token=` | Admin | List all visitors |
-| `GET` | `/api/scrum` | — | Get all scrum items |
-| `POST` | `/api/scrum?token=` | Admin | Create a scrum item |
-| `PUT` | `/api/scrum/{id}?token=` | Admin | Update a scrum item |
-| `DELETE` | `/api/scrum/{id}?token=` | Admin | Delete a scrum item |
+| `GET` | `/api/scrum` | — | Scrum board items |
+| `POST` | `/api/scrum?token=` | Admin | Create item |
+| `PUT` | `/api/scrum/{id}?token=` | Admin | Update item |
+| `DELETE` | `/api/scrum/{id}?token=` | Admin | Delete item |
 | `POST` | `/api/scrum/verify-token` | — | Validate admin token |
 | `GET` | `/api/health` | — | Health check |
 
 ---
 
-## 🐳 Docker (Optional)
+## 🎨 Seasonal Colour Themes
 
-```bash
-# Build and run both services
-docker compose up --build
-
-# Frontend → http://localhost:3000
-# Backend  → http://localhost:8000
-```
-
-Add a `docker-compose.yml` at the project root to wire the two services together (see the AI Learning Ledger repo for a reference implementation).
-
----
-
-## 📦 Build for Production
-
-```bash
-# Frontend — generates optimised files in frontend/dist/
-cd frontend
-npm run build
-
-# Backend — run with workers for production
-cd backend
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
-```
-
----
-
-## 🤝 Contributing
-
-This is a personal portfolio, but feel free to fork it and make it your own. If you spot a bug or have a suggestion, open an issue — always happy to chat.
+| Season | Months | Palette |
+|---|---|---|
+| 🌸 Spring | Mar – May | Light mint, green + pink |
+| ☀️ Summer | Jun – Aug | Deep navy, sunset orange + gold |
+| 🍂 Fall | Sep – Nov | Dark warm, burnt orange + crimson |
+| ❄️ Winter | Dec – Feb | Near-black, ice blue + indigo |
 
 ---
 
 ## 📄 License
 
-MIT — do whatever you like with it.
+MIT — fork it and make it yours.
 
 ---
 
 <p align="center">
   Built with React · TypeScript · FastAPI · and a lot of ☕
   <br/>
-  <a href="https://github.com/sayalik277">@sayalik277</a>
+  <a href="https://github.com/sayalik277">@sayalik277</a> &nbsp;·&nbsp;
+  <a href="https://linkedin.com/in/sayalikamble">LinkedIn</a>
 </p>

@@ -1,7 +1,9 @@
 import axios from 'axios'
 import type { Visitor, ScrumItem } from '../types'
 
-export const api = axios.create({ baseURL: '' })
+// Dev/Docker: empty → Vite proxy or nginx proxy handles /api/
+// Production (Vercel): set VITE_API_URL=https://your-backend.onrender.com
+export const api = axios.create({ baseURL: import.meta.env.VITE_API_URL ?? '' })
 
 export const visitorsApi = {
   count: () => api.get<{ count: number }>('/api/visitors/count').then(r => r.data),
