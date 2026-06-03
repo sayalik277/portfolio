@@ -1,13 +1,12 @@
 import type { SeasonTheme } from '../types'
+import { BOOKS } from '../data/books'
+import type { ReadingStatus } from '../data/books'
 
-const BOOKS = [
-  { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', emoji: '🧠' },
-  { title: 'The Psychology of Money', author: 'Morgan Housel', emoji: '💰' },
-  { title: 'Atomic Habits', author: 'James Clear', emoji: '⚡' },
-  { title: 'The Phoenix Project', author: 'Kim, Behr & Spafford', emoji: '🔥' },
-  { title: 'Deep Work', author: 'Cal Newport', emoji: '🎯' },
-  { title: 'Clean Code', author: 'Robert C. Martin', emoji: '🛠' },
-]
+const STATUS_LABEL: Record<ReadingStatus, string> = {
+  'reading':      '📖 Reading',
+  'want-to-read': '🔖 Up next',
+  'done':         '✅ Done',
+}
 
 const TRAITS = [
   { label: 'Ambivert', desc: 'Energised by deep 1:1 conversations; recharges in a quiet room with a good book.', emoji: '🌗' },
@@ -107,16 +106,26 @@ export default function About({ theme }: Props) {
                   style={{
                     background: theme.bgCard,
                     borderColor: theme.border,
-                    borderLeft: `3px solid ${theme.primary}`,
+                    borderLeft: `3px solid ${
+                      book.status === 'reading' ? theme.primary :
+                      book.status === 'done'    ? theme.accent :
+                      theme.border
+                    }`,
                   }}
                 >
                   <span className="text-2xl">{book.emoji}</span>
-                  <div>
-                    <div className="text-sm font-medium" style={{ color: theme.textPrimary }}>
-                      {book.title}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-sm font-medium" style={{ color: theme.textPrimary }}>
+                        {book.title}
+                      </span>
+                      <span className="text-xs px-1.5 py-0.5 rounded-full"
+                        style={{ background: `${theme.primary}20`, color: theme.primary, whiteSpace: 'nowrap' }}>
+                        {STATUS_LABEL[book.status]}
+                      </span>
                     </div>
-                    <div className="text-xs opacity-60" style={{ color: theme.textMuted }}>
-                      {book.author}
+                    <div className="text-xs opacity-60 mt-0.5" style={{ color: theme.textMuted }}>
+                      {book.author}{book.note ? ` · ${book.note}` : ''}
                     </div>
                   </div>
                 </div>
