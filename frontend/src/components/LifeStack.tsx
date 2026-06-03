@@ -1,219 +1,60 @@
 import type { SeasonTheme } from '../types'
 import { SectionHeader } from './About'
-import {
-  GOALS, GOALS_YEAR, CUISINES, YOGA_JOURNEY, YOGA_POSES,
-} from '../data/goals'
-import type { Goal, GoalStatus, CookLevel } from '../data/goals'
+import { QUEST_CATEGORIES, QUEST_YEAR, HOBBIES } from '../data/goals'
+import type { QuestCategory } from '../data/goals'
 
 interface Props { theme: SeasonTheme }
 
-const STATUS_LABEL: Record<GoalStatus, string> = {
-  'planned':     '📋 Planned',
-  'in-progress': '🔥 In Progress',
-  'done':        '✅ Done',
-}
-
-const STATUS_COLOR: Record<GoalStatus, string> = {
-  'planned':     'border-l-2',
-  'in-progress': 'border-l-2',
-  'done':        'border-l-2',
-}
-
-const COOK_LABEL: Record<CookLevel, string> = {
-  'comfortable': '✅ Comfortable',
-  'learning':    '📖 Learning',
-  'exploring':   '🔍 Exploring',
-}
-
-const POSE_LABEL = {
-  'comfortable':  '✅ Got it',
-  'working-on':   '🔄 Working on',
-  'goal':         '🎯 Goal',
-}
-
-export default function LifeStack({ theme }: Props) {
-  const proGoals  = GOALS.filter(g => g.type === 'professional')
-  const persGoals = GOALS.filter(g => g.type === 'personal')
-
+export default function SideQuests({ theme }: Props) {
   return (
-    <section id="life-stack" className="py-24 px-6">
+    <section id="side-quests" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           theme={theme}
-          tag="// life_stack"
-          title="Life Stack"
+          tag="// side_quests"
+          title="Side Quests"
         />
-        <p className="mt-4 text-base max-w-xl" style={{ color: theme.textMuted }}>
-          What I'm building this year — professionally and personally. Code, cuisines, and a yoga mat.
+        <p className="mt-4 text-base max-w-2xl" style={{ color: theme.textMuted }}>
+          Things I'm learning, building, and exploring — beyond the codebase. Every engineer
+          is more than their stack.
         </p>
 
-        {/* ── 2026 Goals ──────────────────────────────────────────────── */}
+        {/* ── 2026 Quest Log ──────────────────────────────────────────── */}
         <div className="mt-16">
-          <h3 className="font-serif text-xl font-bold mb-8 flex items-center gap-2"
-            style={{ color: theme.textPrimary }}>
-            <span>🎯</span>
-            <span>{GOALS_YEAR} Goals</span>
-          </h3>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Professional */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-xs px-2 py-1 rounded"
-                  style={{ background: `${theme.primary}18`, color: theme.primary }}>
-                  💼 Professional
-                </span>
-              </div>
-              <div className="flex flex-col gap-3">
-                {proGoals.map((goal) => (
-                  <GoalCard key={goal.title} goal={goal} theme={theme} />
-                ))}
-              </div>
-            </div>
-
-            {/* Personal */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-xs px-2 py-1 rounded"
-                  style={{ background: `${theme.secondary}22`, color: theme.secondary }}>
-                  🌱 Personal
-                </span>
-              </div>
-              <div className="flex flex-col gap-3">
-                {persGoals.map((goal) => (
-                  <GoalCard key={goal.title} goal={goal} theme={theme} />
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center gap-3 mb-8">
+            <h3 className="font-serif text-xl font-bold" style={{ color: theme.textPrimary }}>
+              {QUEST_YEAR} Quest Log
+            </h3>
+            <span
+              className="font-mono text-xs px-2 py-1 rounded-full border"
+              style={{ borderColor: theme.border, color: theme.textMuted }}
+            >
+              in progress
+            </span>
           </div>
-        </div>
 
-        {/* ── In the Kitchen ──────────────────────────────────────────── */}
-        <div className="mt-20">
-          <h3 className="font-serif text-xl font-bold mb-2 flex items-center gap-2"
-            style={{ color: theme.textPrimary }}>
-            <span>🍳</span> In the Kitchen
-          </h3>
-          <p className="text-sm mb-8" style={{ color: theme.textMuted }}>
-            Cooking is my offline debugging — patient, iterative, and deeply satisfying when it works.
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {CUISINES.map((c) => (
-              <div
-                key={c.name}
-                className="p-5 rounded-2xl border flex flex-col gap-3 transition-all hover:scale-105 hover:-translate-y-0.5"
-                style={{ background: theme.bgCard, borderColor: theme.border }}
-              >
-                <div className="text-3xl">{c.emoji}</div>
-                <div>
-                  <div className="font-semibold text-sm" style={{ color: theme.textPrimary }}>
-                    {c.name}
-                  </div>
-                  <div className="text-xs mt-0.5 px-1.5 py-0.5 rounded-full inline-block"
-                    style={{
-                      background: c.level === 'comfortable'
-                        ? `${theme.accent}22`
-                        : c.level === 'learning'
-                        ? `${theme.primary}20`
-                        : `${theme.secondary}20`,
-                      color: c.level === 'comfortable'
-                        ? theme.accent
-                        : c.level === 'learning'
-                        ? theme.primary
-                        : theme.secondary,
-                    }}>
-                    {COOK_LABEL[c.level]}
-                  </div>
-                </div>
-                <div className="text-xs font-medium" style={{ color: theme.textSecondary }}>
-                  ✨ {c.signature}
-                </div>
-                {c.note && (
-                  <div className="text-xs italic leading-relaxed" style={{ color: theme.textMuted }}>
-                    "{c.note}"
-                  </div>
-                )}
-              </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {QUEST_CATEGORIES.map(cat => (
+              <QuestColumn key={cat.title} cat={cat} theme={theme} />
             ))}
           </div>
         </div>
 
-        {/* ── On the Mat ──────────────────────────────────────────────── */}
+        {/* ── Hobbies ─────────────────────────────────────────────────── */}
         <div className="mt-20">
-          <h3 className="font-serif text-xl font-bold mb-2 flex items-center gap-2"
-            style={{ color: theme.textPrimary }}>
-            <span>🧘‍♀️</span> On the Mat
-          </h3>
+          <div className="flex items-center gap-3 mb-3">
+            <h3 className="font-serif text-xl font-bold" style={{ color: theme.textPrimary }}>
+              Off-Screen
+            </h3>
+          </div>
           <p className="text-sm mb-8" style={{ color: theme.textMuted }}>
-            A beginner finding stillness, one breath at a time.
+            Current hobbies — and what each one quietly says about how I think as an engineer.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Journey stats */}
-            <div
-              className="p-6 rounded-2xl border"
-              style={{ background: theme.bgCard, borderColor: theme.border }}
-            >
-              <div className="text-4xl mb-4">🌿</div>
-              <div className="grid grid-cols-2 gap-4 mb-5">
-                {[
-                  { label: 'Level',     value: YOGA_JOURNEY.level },
-                  { label: 'Since',     value: YOGA_JOURNEY.started },
-                  { label: 'Practice',  value: YOGA_JOURNEY.practice },
-                  { label: 'Style',     value: YOGA_JOURNEY.style },
-                ].map(item => (
-                  <div key={item.label}>
-                    <div className="text-xs uppercase tracking-widest mb-0.5"
-                      style={{ color: theme.textMuted }}>
-                      {item.label}
-                    </div>
-                    <div className="text-sm font-semibold" style={{ color: theme.primary }}>
-                      {item.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm leading-relaxed italic"
-                style={{ color: theme.textSecondary }}>
-                "{YOGA_JOURNEY.intention}"
-              </p>
-            </div>
-
-            {/* Poses grid */}
-            <div>
-              <div className="text-xs font-mono mb-4" style={{ color: theme.textMuted }}>
-                poses tracker
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {YOGA_POSES.map((pose) => (
-                  <div
-                    key={pose.name}
-                    className="flex items-start gap-2.5 p-3 rounded-xl border transition-all hover:translate-x-0.5"
-                    style={{
-                      background: theme.bgCard,
-                      borderColor: theme.border,
-                      borderLeft: `3px solid ${
-                        pose.status === 'comfortable' ? theme.accent :
-                        pose.status === 'working-on'  ? theme.primary :
-                        theme.secondary
-                      }`,
-                    }}
-                  >
-                    <span className="text-lg">{pose.emoji}</span>
-                    <div>
-                      <div className="text-xs font-medium leading-tight"
-                        style={{ color: theme.textPrimary }}>
-                        {pose.name}
-                      </div>
-                      <div className="text-xs mt-0.5" style={{ color: theme.textMuted }}>
-                        {POSE_LABEL[pose.status]}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {HOBBIES.map(hobby => (
+              <HobbyCard key={hobby.name} hobby={hobby} theme={theme} />
+            ))}
           </div>
         </div>
       </div>
@@ -221,47 +62,121 @@ export default function LifeStack({ theme }: Props) {
   )
 }
 
-function GoalCard({ goal, theme }: { goal: Goal; theme: SeasonTheme }) {
+function QuestColumn({ cat, theme }: { cat: QuestCategory; theme: SeasonTheme }) {
+  const done  = cat.items.filter(i => i.done).length
+  const total = cat.items.length
+  const pct   = Math.round((done / total) * 100)
+
+  const accentColor =
+    cat.color === 'primary'   ? theme.primary :
+    cat.color === 'secondary' ? theme.secondary :
+    cat.color === 'accent'    ? theme.accent :
+    theme.textMuted
+
   return (
     <div
-      className={`p-4 rounded-xl border transition-all hover:translate-x-1 ${STATUS_COLOR[goal.status]}`}
-      style={{
-        background: theme.bgCard,
-        borderColor: theme.border,
-        borderLeftColor:
-          goal.status === 'done'        ? theme.accent :
-          goal.status === 'in-progress' ? theme.primary :
-          theme.border,
-      }}
+      className="p-5 rounded-2xl border flex flex-col gap-4"
+      style={{ background: theme.bgCard, borderColor: theme.border }}
     >
-      <div className="flex items-start gap-3">
-        <span className="text-xl mt-0.5">{goal.emoji}</span>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap mb-1">
-            <span className="text-sm font-semibold" style={{ color: theme.textPrimary }}>
-              {goal.title}
-            </span>
-            <span
-              className="text-xs px-1.5 py-0.5 rounded-full whitespace-nowrap"
-              style={{
-                background:
-                  goal.status === 'done'        ? `${theme.accent}22` :
-                  goal.status === 'in-progress' ? `${theme.primary}20` :
-                  `${theme.border}60`,
-                color:
-                  goal.status === 'done'        ? theme.accent :
-                  goal.status === 'in-progress' ? theme.primary :
-                  theme.textMuted,
-              }}
-            >
-              {STATUS_LABEL[goal.status]}
-            </span>
+      {/* Header */}
+      <div>
+        <div className="text-2xl mb-2">{cat.emoji}</div>
+        <div className="font-semibold text-sm" style={{ color: theme.textPrimary }}>
+          {cat.title}
+        </div>
+
+        {/* Progress bar */}
+        <div className="mt-2 flex items-center gap-2">
+          <div
+            className="flex-1 h-1 rounded-full overflow-hidden"
+            style={{ background: `${accentColor}20` }}
+          >
+            <div
+              className="h-full rounded-full transition-all duration-700"
+              style={{ width: `${pct}%`, background: accentColor }}
+            />
           </div>
-          <p className="text-xs leading-relaxed" style={{ color: theme.textMuted }}>
-            {goal.description}
-          </p>
+          <span className="text-xs font-mono" style={{ color: accentColor }}>
+            {done}/{total}
+          </span>
         </div>
       </div>
+
+      {/* Items */}
+      <ul className="flex flex-col gap-2.5">
+        {cat.items.map((item, i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span
+              className="mt-0.5 text-sm flex-shrink-0"
+              style={{ color: item.done ? accentColor : theme.border }}
+            >
+              {item.done ? '✓' : '○'}
+            </span>
+            <div className="min-w-0">
+              <span
+                className="text-xs leading-snug"
+                style={{
+                  color: item.done ? theme.textMuted : theme.textSecondary,
+                  textDecoration: item.done ? 'line-through' : 'none',
+                }}
+              >
+                {item.text}
+              </span>
+              {item.note && (
+                <div className="text-xs mt-0.5 opacity-50" style={{ color: theme.textMuted }}>
+                  {item.note}
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function HobbyCard({ hobby, theme }: { hobby: (typeof HOBBIES)[0]; theme: SeasonTheme }) {
+  return (
+    <div
+      className="p-6 rounded-2xl border transition-all hover:-translate-y-0.5"
+      style={{ background: theme.bgCard, borderColor: theme.border }}
+    >
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">{hobby.emoji}</span>
+          <div>
+            <div className="font-semibold text-base" style={{ color: theme.textPrimary }}>
+              {hobby.name}
+            </div>
+            <div
+              className="text-xs mt-0.5 font-mono px-1.5 py-0.5 rounded inline-block"
+              style={{ background: `${theme.primary}18`, color: theme.primary }}
+            >
+              {hobby.level}
+            </div>
+          </div>
+        </div>
+
+        {/* SE quality badge */}
+        <div
+          className="text-xs px-2.5 py-1 rounded-full border whitespace-nowrap flex-shrink-0"
+          style={{
+            borderColor: theme.border,
+            color: theme.textMuted,
+            background: `${theme.secondary}12`,
+          }}
+        >
+          ⚙ {hobby.seQuality}
+        </div>
+      </div>
+
+      <p className="text-sm italic mb-3 leading-snug" style={{ color: theme.primary }}>
+        "{hobby.tagline}"
+      </p>
+
+      <p className="text-sm leading-relaxed" style={{ color: theme.textSecondary }}>
+        {hobby.description}
+      </p>
     </div>
   )
 }

@@ -1,166 +1,120 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Edit freely — add goals, update status, or bump the year.
-// status: 'planned' | 'in-progress' | 'done'
-// type:   'professional' | 'personal'
+// 2026 Quest Log — edit freely, tick items done, add new categories.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type GoalStatus = 'planned' | 'in-progress' | 'done'
-export type GoalType = 'professional' | 'personal'
-
-export interface Goal {
-  title: string
-  description: string
-  emoji: string
-  status: GoalStatus
-  type: GoalType
-}
-
-export const GOALS_YEAR = '2026'
-
-export const GOALS: Goal[] = [
-  // ── Professional ──────────────────────────────────────────────────────────
-  {
-    title: 'Kubernetes & CKA Cert',
-    description: 'Deep-dive into K8s internals, cluster ops, and earn the Certified Kubernetes Administrator badge.',
-    emoji: '⎈',
-    status: 'in-progress',
-    type: 'professional',
-  },
-  {
-    title: 'AWS Solutions Architect – Professional',
-    description: 'Upgrade from Foundations to the SAP-C02 level. Focus on multi-account, HA, and cost-optimised architectures.',
-    emoji: '☁️',
-    status: 'planned',
-    type: 'professional',
-  },
-  {
-    title: 'System Design Mastery',
-    description: 'Work through large-scale distributed systems design — consistent hashing, CRDT, leader election, and beyond.',
-    emoji: '🏗️',
-    status: 'in-progress',
-    type: 'professional',
-  },
-  {
-    title: 'ML / AI Engineering Foundations',
-    description: 'Move from "using LLM APIs" to understanding fine-tuning, embeddings, RAG pipelines, and eval frameworks.',
-    emoji: '🤖',
-    status: 'in-progress',
-    type: 'professional',
-  },
-  {
-    title: 'Go Programming Language',
-    description: 'Learn Go well enough to write production-quality microservices and CLI tools.',
-    emoji: '🐹',
-    status: 'planned',
-    type: 'professional',
-  },
-  {
-    title: 'Open Source Contribution',
-    description: 'Land at least one meaningful PR in a project I use daily — LangChain, FastAPI, or similar.',
-    emoji: '🌐',
-    status: 'planned',
-    type: 'professional',
-  },
-  // ── Personal ──────────────────────────────────────────────────────────────
-  {
-    title: 'Daily Yoga Habit',
-    description: 'Build a consistent 15-minute morning yoga practice. Target: 90-day streak before year end.',
-    emoji: '🧘‍♀️',
-    status: 'in-progress',
-    type: 'personal',
-  },
-  {
-    title: 'Cook a New Cuisine Monthly',
-    description: 'One new cuisine or technique every month — broaden the kitchen repertoire beyond the comfort zone.',
-    emoji: '🍳',
-    status: 'in-progress',
-    type: 'personal',
-  },
-  {
-    title: 'Read 12 Books This Year',
-    description: 'One book a month — mix of psychology, tech, and fiction. Track progress in the bookshelf.',
-    emoji: '📚',
-    status: 'in-progress',
-    type: 'personal',
-  },
-  {
-    title: 'Consistent Morning Routine',
-    description: 'Lock in a 6 AM wake-up, yoga, journalling, and no phone for the first 30 minutes.',
-    emoji: '🌅',
-    status: 'in-progress',
-    type: 'personal',
-  },
-]
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Cooking interests — edit cuisine/level/dishes freely
-// level: 'comfortable' | 'learning' | 'exploring'
-// ─────────────────────────────────────────────────────────────────────────────
-export type CookLevel = 'comfortable' | 'learning' | 'exploring'
-
-export interface Cuisine {
-  name: string
-  emoji: string
-  level: CookLevel
-  signature: string    // a dish you make well (or are working on)
+export interface QuestItem {
+  text: string
+  done: boolean
   note?: string
 }
 
-export const CUISINES: Cuisine[] = [
+export interface QuestCategory {
+  emoji: string
+  title: string
+  color: 'primary' | 'secondary' | 'accent' | 'muted'
+  items: QuestItem[]
+}
+
+export const QUEST_YEAR = '2026'
+
+export const QUEST_CATEGORIES: QuestCategory[] = [
   {
-    name: 'Indian',
-    emoji: '🫕',
-    level: 'comfortable',
-    signature: 'Dal Makhani & Biryani',
-    note: 'Home base — could cook it with my eyes closed.',
+    emoji: '📚',
+    title: 'Books to Read',
+    color: 'primary',
+    items: [
+      { text: 'Atomic Habits',                        done: false, note: 'James Clear' },
+      { text: 'Designing Data-Intensive Applications', done: false, note: 'Martin Kleppmann' },
+      { text: 'The Pragmatic Programmer',              done: false, note: 'Hunt & Thomas' },
+      { text: 'A Little Life',                         done: false, note: 'Fiction pick' },
+      { text: 'The Psychology of Money',               done: true,  note: 'Morgan Housel' },
+    ],
   },
   {
-    name: 'Italian',
-    emoji: '🍝',
-    level: 'learning',
-    signature: 'Pasta Aglio e Olio',
-    note: 'Working on making pasta from scratch.',
+    emoji: '🍳',
+    title: 'Kitchen Goals',
+    color: 'secondary',
+    items: [
+      { text: 'Homemade pasta from scratch',      done: false },
+      { text: 'Classic French Onion Soup',         done: false, note: 'a French goal too' },
+      { text: 'Sourdough bread',                   done: false, note: '100% hydration loaf' },
+      { text: 'Sushi rolls at home',               done: false },
+      { text: 'Miso ramen broth (6-hr simmer)',    done: false },
+    ],
   },
   {
-    name: 'Japanese',
-    emoji: '🍜',
-    level: 'exploring',
-    signature: 'Homemade Miso Ramen',
-    note: 'The broth is a 6-hour project. Worth it.',
+    emoji: '🌍',
+    title: 'Languages',
+    color: 'accent',
+    items: [
+      { text: 'French — reach A2 by December',     done: false, note: 'Duolingo streak + lessons' },
+      { text: 'Read a French children\'s book',     done: false, note: 'Le Petit Prince 🌹' },
+      { text: '5-min conversation in French',       done: false, note: 'stretch goal' },
+    ],
   },
   {
-    name: 'Mediterranean',
-    emoji: '🥙',
-    level: 'learning',
-    signature: 'Shakshuka & Hummus',
-    note: 'Obsessed with the simplicity of good olive oil.',
+    emoji: '🎯',
+    title: 'Habits to Build',
+    color: 'muted',
+    items: [
+      { text: 'Daily yoga — 90-day streak',         done: false },
+      { text: 'Morning journal (5 min)',             done: false },
+      { text: 'No phone for first 30 min',          done: false },
+      { text: 'Weekly long outdoor walk',            done: false },
+    ],
   },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Yoga journey — update as you progress
+// Hobbies — shows current hobbies + how each reflects an SE quality.
+// seQuality: the engineering trait this hobby mirrors.
+// Edit descriptions to keep them fresh and personal.
 // ─────────────────────────────────────────────────────────────────────────────
-export interface YogaPose {
-  name: string
+
+export interface Hobby {
   emoji: string
-  status: 'comfortable' | 'working-on' | 'goal'
+  name: string
+  level: string
+  seQuality: string
+  tagline: string
+  description: string
 }
 
-export const YOGA_JOURNEY = {
-  level: 'Beginner' as const,
-  started: 'Early 2026',
-  practice: '10–15 min daily',
-  style: 'Hatha & Yin',
-  intention: 'Build flexibility, calm the mind, and start mornings with intention rather than a screen.',
-}
-
-export const YOGA_POSES: YogaPose[] = [
-  { name: 'Mountain Pose',       emoji: '🏔️', status: 'comfortable' },
-  { name: "Child's Pose",        emoji: '🙇‍♀️', status: 'comfortable' },
-  { name: 'Cat-Cow',             emoji: '🐈', status: 'comfortable' },
-  { name: 'Downward Dog',        emoji: '🐕', status: 'working-on' },
-  { name: 'Warrior I & II',      emoji: '⚔️', status: 'working-on' },
-  { name: 'Tree Pose',           emoji: '🌳', status: 'working-on' },
-  { name: 'Pigeon Pose',         emoji: '🕊️', status: 'goal' },
-  { name: 'Headstand',           emoji: '🙃', status: 'goal' },
+export const HOBBIES: Hobby[] = [
+  {
+    emoji: '🍳',
+    name: 'Cooking',
+    level: 'Intermediate',
+    seQuality: 'Iterative Development',
+    tagline: 'A recipe is just an algorithm with tastier outputs.',
+    description:
+      'Every dish is a sprint. I plan the mise en place (architecture), execute the recipe (implementation), taste and adjust (debugging), then serve (ship). When a dish fails, I trace it back to root cause — wrong ratio, wrong heat, wrong timing. Cooking trained me to be systematic before being creative.',
+  },
+  {
+    emoji: '🧘‍♀️',
+    name: 'Yoga',
+    level: 'Beginner',
+    seQuality: 'Performance Optimization',
+    tagline: 'Optimizing the hardware that runs the software.',
+    description:
+      'Yoga taught me that the body and mind are the same system. 15 minutes on the mat clears the stack, reduces context-switch latency, and sharpens focus for the next deep-work block. Flexibility in code and in posture is a feature, not a default — and both require consistent practice to maintain.',
+  },
+  {
+    emoji: '📖',
+    name: 'Reading',
+    level: 'Enthusiast',
+    seQuality: 'Knowledge Architecture',
+    tagline: 'Books are open-source wisdom — curated commits from the world\'s best thinkers.',
+    description:
+      'I read across domains: psychology, systems thinking, economics, fiction. The best engineering insight I had this year came from Kahneman\'s System 1 vs System 2 thinking — it changed how I approach code reviews. Reading is how I import dependencies I didn\'t know I needed.',
+  },
+  {
+    emoji: '🇫🇷',
+    name: 'Learning French',
+    level: 'A1 → A2',
+    seQuality: 'New Language Runtime',
+    tagline: 'Every engineer should be fluent in more than one language — human or machine.',
+    description:
+      'Learning French because staying a beginner sharpens empathy for junior devs. French grammar is surprisingly typed — gendered nouns feel like typed variables, verb conjugations like overloaded methods. Also, "débogage" is literally just debugging in French, which feels about right.',
+  },
 ]

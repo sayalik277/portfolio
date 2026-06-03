@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Life Stack', href: '#life-stack' },
+  { label: 'Side Quests', href: '#side-quests' },
   { label: 'Now', href: '#scrum' },
 ]
 
