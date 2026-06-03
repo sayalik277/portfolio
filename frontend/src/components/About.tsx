@@ -4,16 +4,16 @@ const BOOKS = [
   { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', emoji: '🧠' },
   { title: 'The Psychology of Money', author: 'Morgan Housel', emoji: '💰' },
   { title: 'Atomic Habits', author: 'James Clear', emoji: '⚡' },
-  { title: 'Clean Code', author: 'Robert C. Martin', emoji: '🛠' },
   { title: 'The Phoenix Project', author: 'Kim, Behr & Spafford', emoji: '🔥' },
   { title: 'Deep Work', author: 'Cal Newport', emoji: '🎯' },
+  { title: 'Clean Code', author: 'Robert C. Martin', emoji: '🛠' },
 ]
 
 const TRAITS = [
-  { label: 'Ambivert', desc: 'Energised by deep 1:1 conversations; recharges with a good book.', emoji: '🌗' },
-  { label: 'Psych Reader', desc: 'Studies cognitive biases to write better code and work better with teams.', emoji: '🧩' },
-  { label: 'Cloud Thinker', desc: 'Designs systems with resilience first — infra is just code.', emoji: '☁️' },
-  { label: 'Lifelong Learner', desc: 'Currently mastering React patterns & TypeScript-first backends.', emoji: '📚' },
+  { label: 'Ambivert', desc: 'Energised by deep 1:1 conversations; recharges in a quiet room with a good book.', emoji: '🌗' },
+  { label: 'Psych Reader', desc: 'Applies cognitive-bias frameworks to code reviews and team dynamics alike.', emoji: '🧩' },
+  { label: 'Cloud Native', desc: 'Shipped to 300+ AWS teams at Amazon — infra is just code with good type safety.', emoji: '☁️' },
+  { label: 'AI Builder', desc: 'Building agentic AI systems with LangChain, LangGraph, and Claude.', emoji: '🤖' },
 ]
 
 interface Props { theme: SeasonTheme }
@@ -28,19 +28,21 @@ export default function About({ theme }: Props) {
           {/* Left — bio */}
           <div>
             <p className="text-lg leading-relaxed mb-6" style={{ color: theme.textSecondary }}>
-              I'm a{' '}
-              <Highlight theme={theme}>Full-Stack Developer</Highlight> with 2 years of experience,
-              learning React and TypeScript while building real things. I find equal satisfaction in
-              understanding code architecture and human psychology — the two aren't that different.
+              I'm <Highlight theme={theme}>Sayali Kamble</Highlight> — a Software Engineer with 5+
+              years across enterprise, cloud, and AI. I was an{' '}
+              <Highlight theme={theme}>SDE at Amazon AWS</Highlight>, where I shipped a serverless
+              platform used by 300+ internal teams. Before that, Accenture and CloudBig. Now I'm
+              building AI agents and full-stack products of my own.
             </p>
             <p className="text-base leading-relaxed mb-6" style={{ color: theme.textSecondary }}>
-              My superpower is{' '}
-              <Highlight theme={theme}>reading people as well as documentation</Highlight>. Growing
-              up as an ambivert taught me when to listen, when to speak, and when to just ship it.
+              I hold an <Highlight theme={theme}>M.S. in Computer Science from UT Arlington</Highlight>{' '}
+              and two <Highlight theme={theme}>Oracle Cloud Infrastructure certifications</Highlight>.
+              My superpower is reading systems — and people. Growing up as an ambivert taught me
+              when to listen, when to speak, and when to just ship it.
             </p>
             <p className="text-base leading-relaxed" style={{ color: theme.textSecondary }}>
-              Off-screen: I have a reading habit that borders on obsessive, an unhealthy relationship
-              with terminal themes, and a deep love for a perfectly brewed cup of coffee ☕.
+              Off-screen: I have a reading habit that borders on obsessive, a deep appreciation for
+              cognitive psychology, and a non-negotiable relationship with good coffee ☕.
             </p>
 
             {/* Trait cards */}
@@ -66,10 +68,33 @@ export default function About({ theme }: Props) {
             </div>
           </div>
 
-          {/* Right — bookshelf */}
+          {/* Right — certs + bookshelf */}
           <div>
+            {/* Certifications */}
             <h3
-              className="font-serif text-xl font-bold mb-6 flex items-center gap-2"
+              className="font-serif text-lg font-bold mb-3 flex items-center gap-2"
+              style={{ color: theme.textPrimary }}
+            >
+              <span>🏅</span> Certifications
+            </h3>
+            <div className="flex flex-col gap-2 mb-7">
+              {[
+                'Oracle Cloud Infrastructure 2025 AI Foundations Associate',
+                'Oracle Cloud Infrastructure 2023 Foundations Associate',
+              ].map(cert => (
+                <div
+                  key={cert}
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-xl border text-sm"
+                  style={{ background: theme.bgCard, borderColor: theme.border, color: theme.textSecondary }}
+                >
+                  <span className="text-base">✓</span>
+                  <span>{cert}</span>
+                </div>
+              ))}
+            </div>
+
+            <h3
+              className="font-serif text-lg font-bold mb-4 flex items-center gap-2"
               style={{ color: theme.textPrimary }}
             >
               <span>📖</span> Currently on my shelf

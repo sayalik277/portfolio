@@ -4,10 +4,10 @@ import type { SeasonTheme } from '../types'
 import { FiGithub, FiLinkedin, FiTwitter, FiMail } from 'react-icons/fi'
 
 const SOCIAL = [
-  { icon: FiGithub, label: 'GitHub', href: 'https://github.com/yourusername' },
-  { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername' },
-  { icon: FiTwitter, label: 'Twitter', href: 'https://twitter.com/yourusername' },
-  { icon: FiMail, label: 'Email', href: 'mailto:you@example.com' },
+  { icon: FiGithub, label: 'GitHub', href: 'https://github.com/sayalik277' },
+  { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/sayalikamble' },
+  { icon: FiTwitter, label: 'Twitter', href: 'https://twitter.com/sayalik277' },
+  { icon: FiMail, label: 'Email', href: 'mailto:sayalik94@gmail.com' },
 ]
 
 interface Props { theme: SeasonTheme }
@@ -26,7 +26,7 @@ export default function Footer({ theme }: Props) {
       <div className="max-w-6xl mx-auto flex flex-col items-center gap-6">
         {/* Brand */}
         <span className="font-serif text-2xl font-bold" style={{ color: theme.primary }}>
-          &lt;Dev /&gt;
+          Sayali Kamble
         </span>
 
         {/* Social links */}
@@ -66,7 +66,7 @@ export default function Footer({ theme }: Props) {
 
         <p className="text-xs text-center opacity-40" style={{ color: theme.textMuted }}>
           Built with React · TypeScript · FastAPI · {theme.emoji} {theme.label} theme
-          <br />© {new Date().getFullYear()} — Designed & developed by me, with a lot of ☕
+          <br />© {new Date().getFullYear()} Sayali Kamble — Designed & developed with a lot of ☕
         </p>
       </div>
     </footer>

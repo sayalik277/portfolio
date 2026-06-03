@@ -4,12 +4,13 @@ import { visitorsApi } from '../api/client'
 import type { SeasonTheme } from '../types'
 
 const ROLES = [
+  'Software Development Engineer',
+  'AWS Cloud Architect',
   'Full-Stack Developer',
-  'Cloud Enthusiast',
-  'React Learner',
+  'AI Agent Builder',
+  'React & TypeScript Fan',
   'Book Devourer',
   'Psychology Nerd',
-  'TypeScript Advocate',
 ]
 
 interface Props {
@@ -112,7 +113,7 @@ export default function Hero({ theme, visitorName }: Props) {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            I build things
+            I'm Sayali
           </span>
         </h1>
 
@@ -134,10 +135,11 @@ export default function Hero({ theme, visitorName }: Props) {
           className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10 opacity-80"
           style={{ color: theme.textSecondary }}
         >
-          Full-Stack Developer with 2 years of experience. On a journey to master{' '}
-          <span style={{ color: theme.primary }}>React</span> &amp;{' '}
-          <span style={{ color: theme.secondary }}>TypeScript</span>. I read psychology books, talk
-          to clouds (AWS kind), and occasionally understand people.
+          Software Engineer with 5+ years of experience — ex{' '}
+          <span style={{ color: theme.primary }}>Amazon AWS</span>. I build cloud-native apps,
+          AI agents, and full-stack systems. M.S. Computer Science,{' '}
+          <span style={{ color: theme.secondary }}>UT Arlington</span>. OCI Certified. I also read
+          psychology books and occasionally understand people.
         </p>
 
         {/* CTA buttons */}
@@ -171,8 +173,8 @@ export default function Hero({ theme, visitorName }: Props) {
         {/* Stats bar */}
         <div className="flex flex-wrap justify-center gap-6 text-sm">
           {[
-            { label: 'Years Exp.', value: '2+' },
-            { label: 'Projects', value: '10+' },
+            { label: 'Years Exp.', value: '5+' },
+            { label: 'Companies', value: '4' },
             { label: 'Profile Visits', value: countData ? countData.count.toLocaleString() : '…' },
             { label: 'Books / Year', value: '12+' },
           ].map(stat => (

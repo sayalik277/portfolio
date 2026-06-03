@@ -54,7 +54,7 @@ export default function Navbar({ theme, visitorName }: Props) {
           className="font-serif font-bold text-xl tracking-tight"
           style={{ color: theme.primary }}
         >
-          &lt;Dev /&gt;
+          Sayali.dev
         </Link>
 
         {/* Desktop nav */}
