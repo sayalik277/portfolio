@@ -8,6 +8,7 @@ import Skills from './components/Skills'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import ScrumBoard from './components/ScrumBoard'
+import LifeStack from './components/LifeStack'
 import Footer from './components/Footer'
 import VisitorModal from './components/VisitorModal'
 import AdminPanel from './pages/AdminPanel'
@@ -25,6 +26,7 @@ function Portfolio({ theme, visitorName, showModal, registerVisitor }: ReturnTyp
         <Skills theme={theme} />
         <Projects theme={theme} />
         <Experience theme={theme} />
+        <LifeStack theme={theme} />
         <ScrumBoard theme={theme} />
       </main>
       <Footer theme={theme} />
